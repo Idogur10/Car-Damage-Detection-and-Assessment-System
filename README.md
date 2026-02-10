@@ -45,9 +45,11 @@ This project implements a **deep learning-based object detection system** to aut
 
 ### **Sample Predictions**
 
-![Predictions vs Ground Truth](results/visualizations/predictions_vs_groundtruth.png)
+![Predictions vs Ground Truth](results/visualizations/predictions_vs_groundtruth_filtered.png)
 
-*Yellow boxes = Model predictions | Blue/Cyan boxes = Ground truth*
+*Yellow boxes = Model predictions | Blue boxes = Scratches | Cyan boxes = Dents*
+
+**Note**: Showing only test images containing scratches and dents (270 out of 374 test images, 72.2%)
 
 ### **Confusion Matrix**
 
