@@ -20,6 +20,9 @@ CarDD_YOLO_6classes/
 *.pt
 runs/
 
+# But track the results/ folder (training outputs for README)
+!results/
+
 # Large result files
 *.avi
 *.mp4

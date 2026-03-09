@@ -1,5 +1,5 @@
 """
-Inference Script for Rental Car Damage Detection
+Inference Script for Car Damage Detection
 Use trained model to detect damages in new images
 """
 
@@ -33,7 +33,7 @@ def detect_damages(
     """
 
     print("="*70)
-    print("RENTAL CAR DAMAGE DETECTION")
+    print("CAR DAMAGE DETECTION")
     print("="*70)
 
     # Check if image exists
