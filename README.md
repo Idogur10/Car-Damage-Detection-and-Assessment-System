@@ -131,15 +131,15 @@ After training and threshold selection, we evaluated the final model on the **37
 
 **Pattern:** Classes with distinctive, high-contrast visual features (shattered glass, flat tires, broken lamps) are detected with 90%+ mAP. Subtle damage types (dents, scratches, cracks) that depend on lighting, angle, and resolution score lower. Crack is the hardest class — it has both the fewest training samples and the most subtle visual appearance.
 
-### Test Set Predictions
+### Test Set Predictions vs Ground Truth
 
-Model predictions on the held-out test set (never seen during training or validation) alongside ground truth labels:
+Model predictions (red) overlaid with ground truth labels (green) on test images the model has never seen. When boxes overlap closely, the model's detection is accurate:
 
-![Test Batch 0 - Predictions](results/test_set/test_batch0_pred.jpg)
+![Test Predictions vs GT - Grid 1](results/test_set/test_pred_vs_gt_grid1.jpg)
 
-![Test Batch 0 - Ground Truth](results/test_set/test_batch0_labels.jpg)
+![Test Predictions vs GT - Grid 2](results/test_set/test_pred_vs_gt_grid2.jpg)
 
-![Test Batch 1 - Predictions](results/test_set/test_batch1_pred.jpg)
+> **Red** = model prediction (with confidence %) | **Green** = ground truth (human annotation)
 
 ### Test Set Confusion Matrix
 
@@ -241,12 +241,6 @@ These are real outputs from the full pipeline running on **test images** — ima
 
 **Analysis:** Glass shatter is the easiest damage type for both YOLO (98.7% mAP on test set) and CLIP. The windshield is completely shattered with a dense spiderweb crack pattern covering the entire glass surface. CLIP correctly identifies this as severe (70%) because the glass is fully compromised — not just chipped or cracked. The location confidence is the highest across all demos (83%) because the shattered glass clearly fills the entire windshield area, making it unambiguous. This is the kind of case where the pipeline works best: distinctive visual patterns with high confidence across all stages.
 
-**Generated PDF report:**
-
-![Glass Shatter Report - Page 1](results/pipeline_demo/pdf_glass_shatter_page1.png)
-
-![Glass Shatter Report - Page 2](results/pipeline_demo/pdf_glass_shatter_page2.png)
-
 ### Demo 2: Multi-Damage Front Impact (image 003441) — Best IoU
 
 This image was selected because it has the **highest average IoU (0.944)** between YOLO's predicted bounding boxes and the ground truth labels across all multi-detection test images. This means YOLO's boxes almost perfectly overlap the true damage regions.
@@ -275,12 +269,6 @@ This image was selected because it has the **highest average IoU (0.944)** betwe
 - **CLIP severity** shows high confidence here. The dent is classified as severe (85%) — this makes sense because the front panel is heavily deformed from the impact, likely requiring full panel replacement. The lamp is moderate (78%) — cracked and partially broken but not completely destroyed. The scratch is moderate (74%) — showing primer underneath the paint.
 - **CLIP location** consistently identifies the headlight/front area (41-57% confidence). All three damages are concentrated in the front-left of the car, and CLIP correctly picks up on this. The location confidence is lower than the glass shatter demo because the front area has multiple overlapping panels (bumper, fender, headlight) that are hard to distinguish.
 - **Cost estimation** reflects the severity gradient: the severe dent is the most expensive ($1,000-$3,500 for panel replacement), followed by the moderate scratch ($200-$800 for respray), and the lamp ($150-$500 for replacement). The total $1,350-$4,800 is consistent with a moderate front-end collision repair.
-
-**Generated PDF report:**
-
-![Multi-Damage Report - Page 1](results/pipeline_demo/pdf_multi_damage_best_iou_page1.png)
-
-![Multi-Damage Report - Page 2](results/pipeline_demo/pdf_multi_damage_best_iou_page2.png)
 
 ### Summary — What Works Well and What Doesn't
 
