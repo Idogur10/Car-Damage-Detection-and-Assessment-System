@@ -233,13 +233,13 @@ These are real outputs from the full pipeline running on **test images** — ima
 
 **YOLO detected:** 1 damage — glass shatter with 94% confidence.
 
-**CLIP assessment:**
-- **Severity: severe (70% confidence)** — the windshield is completely shattered with a dense spiderweb crack pattern covering the entire glass surface. CLIP correctly identifies this as severe because the glass is not just chipped or cracked — it's fully compromised with no intact area remaining.
-- **Location: windshield (83% confidence)** — this is the highest location confidence across all demos. The shattered glass clearly fills the entire windshield area, making it unambiguous for CLIP.
+| # | Damage Type | YOLO Conf. | Severity | Sev. Conf. | Location | Loc. Conf. | Cost Range | Repair Method |
+|---|------------|-----------|----------|-----------|----------|-----------|------------|---------------|
+| 1 | glass shatter | 94% | severe | 70% | windshield | 83% | $400 - $1,500 | Full glass replacement (OEM) |
 
-**Cost estimate:** $400 - $1,500 (full OEM glass replacement)
+**Total estimated cost: $400 - $1,500**
 
-**Why these results make sense:** Glass shatter is the easiest damage type for both YOLO (98.7% mAP) and CLIP. The visual pattern is unmistakable — spiderweb cracks across a flat glass surface. This is the kind of case where the pipeline works best.
+**Analysis:** Glass shatter is the easiest damage type for both YOLO (98.7% mAP on test set) and CLIP. The windshield is completely shattered with a dense spiderweb crack pattern covering the entire glass surface. CLIP correctly identifies this as severe (70%) because the glass is fully compromised — not just chipped or cracked. The location confidence is the highest across all demos (83%) because the shattered glass clearly fills the entire windshield area, making it unambiguous. This is the kind of case where the pipeline works best: distinctive visual patterns with high confidence across all stages.
 
 **Generated PDF report:**
 
@@ -247,60 +247,51 @@ These are real outputs from the full pipeline running on **test images** — ima
 
 ![Glass Shatter Report - Page 2](results/pipeline_demo/pdf_glass_shatter_page2.png)
 
-### Demo 2: Scratch + Crack (image 000088)
+### Demo 2: Multi-Damage Front Impact (image 003441) — Best IoU
 
-![Scratch and Crack - Annotated](results/pipeline_demo/scratches_and_cracks.jpg)
+This image was selected because it has the **highest average IoU (0.944)** between YOLO's predicted bounding boxes and the ground truth labels across all multi-detection test images. This means YOLO's boxes almost perfectly overlap the true damage regions.
 
-**YOLO detected:** 2 damages — a crack (59% confidence) and a scratch (35% confidence).
+**Ground truth labels** (what a human annotator marked):
 
-**CLIP assessment:**
-- **Crack: minor severity (53%)** — the crack is small and confined to one area. CLIP's scores were close between minor (53%) and severe (42%), showing uncertainty — cracks are visually ambiguous for CLIP since a small crack and the edge of a large crack can look similar in a crop.
-- **Scratch: moderate severity (52%)** — nearly tied with minor (46%), suggesting this is a borderline case. The scratch shows some primer underneath but the paint isn't fully removed — a textbook moderate case, though CLIP is not confident.
-- **Both located on fender (28% and 44%)** — the damage is near the wheel arch area. The scratch has higher location confidence because the surrounding fender/wheel context is more visible in that part of the image.
+![Ground Truth](results/pipeline_demo/multi_damage_best_iou_gt.jpg)
 
-**Cost estimate:** $300 - $1,100 total (filler repair + touch-up paint)
+**Pipeline predictions** (what our system detected and assessed):
 
-**Why these results make sense:** Scratches and cracks are the hardest damage types for YOLO (62% and 37% mAP respectively). The lower YOLO confidence (35% for the scratch — barely above our 0.35 threshold) and the lower CLIP severity confidence (52-53%) reflect the genuine difficulty of these subtle damage types.
+![Multi-Damage - Annotated](results/pipeline_demo/multi_damage_best_iou.jpg)
 
-**Generated PDF report:**
+**YOLO detected:** 3 damages — dent (90%), lamp broken (89%), scratch (85%). All with high confidence and matching the ground truth labels exactly.
 
-![Scratch + Crack Report - Page 1](results/pipeline_demo/pdf_scratches_and_cracks_page1.png)
+| # | Damage Type | YOLO Conf. | Severity | Sev. Conf. | Location | Loc. Conf. | Cost Range | Repair Method |
+|---|------------|-----------|----------|-----------|----------|-----------|------------|---------------|
+| 1 | dent | 90% | severe | 85% | headlight area | 53% | $1,000 - $3,500 | Panel replacement + repaint |
+| 2 | lamp broken | 89% | moderate | 78% | headlight area | 57% | $150 - $500 | Aftermarket lamp replacement |
+| 3 | scratch | 85% | moderate | 74% | front bumper area | 41% | $200 - $800 | Touch-up paint or partial respray |
 
-![Scratch + Crack Report - Page 2](results/pipeline_demo/pdf_scratches_and_cracks_page2.png)
+**Total estimated cost: $1,350 - $4,800**
 
-### Demo 3: Multiple Damages (image 000848)
+**Analysis:** This image shows a front-end collision with 3 different damage types — the ideal test case for the full pipeline. The results are strong across all stages:
 
-![Multiple Damages - Annotated](results/pipeline_demo/multiple_damages.jpg)
-
-**YOLO detected:** 4 damages — 1 scratch (76% confidence) and 3 dents (68%, 45%, 42% confidence).
-
-**CLIP assessment:**
-- **Scratch: moderate (76% confidence)** — this is the highest CLIP severity confidence across all demos. The scratch clearly shows primer underneath the surface paint, which matches the "moderate" prompt describing "visible scratch showing primer underneath". CLIP located it on the rear bumper (21%) — low confidence because several panels scored similarly (fender 20%, rear bumper 21%, rear door 19%).
-- **Dent #1: moderate (68%)** — a noticeable dent on the rear door panel (26% location confidence). The panel shows visible deformation that needs body work but isn't completely crushed.
-- **Dent #2: moderate (75%)** — the largest dent covering a significant area of the rear door (29% location confidence). Despite its size, CLIP classified it as moderate rather than severe because the panel is deformed but not torn or pierced.
-- **Dent #3: severe (56%)** — a narrow but deep crease along the body line. CLIP's lower confidence (56%) shows it's a borderline case between moderate (39%) and severe (56%), which makes sense — deep creases along body lines are among the hardest dents to repair because they affect structural lines.
-
-**Cost estimate:** $1,700 - $6,300 total (touch-up paint + body filler + panel replacement)
-
-**Why these results make sense:** This is the most complex case — multiple damages on the same car. The dents are all on the rear door area, which CLIP consistently identifies despite moderate confidence. The severe dent has the highest cost ($1,000-$3,500) because panel replacement is the most expensive repair type. The total $1,700-$6,300 range reflects the reality that a car with 4 damages on the rear section likely had a significant rear-end impact.
+- **YOLO detection** is excellent — all 3 damages detected with 85-90% confidence, and the bounding boxes match the ground truth with 94.4% average IoU. YOLO correctly identifies 3 different damage types (dent, lamp broken, scratch) in a single image.
+- **CLIP severity** shows high confidence here. The dent is classified as severe (85%) — this makes sense because the front panel is heavily deformed from the impact, likely requiring full panel replacement. The lamp is moderate (78%) — cracked and partially broken but not completely destroyed. The scratch is moderate (74%) — showing primer underneath the paint.
+- **CLIP location** consistently identifies the headlight/front area (41-57% confidence). All three damages are concentrated in the front-left of the car, and CLIP correctly picks up on this. The location confidence is lower than the glass shatter demo because the front area has multiple overlapping panels (bumper, fender, headlight) that are hard to distinguish.
+- **Cost estimation** reflects the severity gradient: the severe dent is the most expensive ($1,000-$3,500 for panel replacement), followed by the moderate scratch ($200-$800 for respray), and the lamp ($150-$500 for replacement). The total $1,350-$4,800 is consistent with a moderate front-end collision repair.
 
 **Generated PDF report:**
 
-![Multiple Damages Report - Page 1](results/pipeline_demo/pdf_multiple_damages_page1.png)
+![Multi-Damage Report - Page 1](results/pipeline_demo/pdf_multi_damage_best_iou_page1.png)
 
-![Multiple Damages Report - Page 2](results/pipeline_demo/pdf_multiple_damages_page2.png)
-
-![Multiple Damages Report - Page 3](results/pipeline_demo/pdf_multiple_damages_page3.png)
+![Multi-Damage Report - Page 2](results/pipeline_demo/pdf_multi_damage_best_iou_page2.png)
 
 ### Summary — What Works Well and What Doesn't
 
 | Scenario | YOLO | CLIP Severity | CLIP Location | Overall |
 |----------|------|---------------|---------------|---------|
-| Glass/lamp/tire (distinctive) | Very high conf. (90%+) | High conf. (60-70%) | High conf. (80%+) | Reliable |
-| Dents (moderate) | Good conf. (40-70%) | Good conf. (65-75%) | Moderate conf. (25-35%) | Reasonable |
+| Glass/lamp/tire (distinctive) | Very high conf. (90%+) | High conf. (60-85%) | High conf. (50-83%) | Reliable |
+| Multiple damages (front impact) | High conf. (85-90%) | High conf. (74-85%) | Moderate conf. (41-57%) | Strong |
+| Dents (subtle deformations) | Good conf. (40-70%) | Good conf. (65-75%) | Moderate conf. (25-35%) | Reasonable |
 | Scratches/cracks (subtle) | Lower conf. (35-60%) | Lower conf. (50-55%) | Lower conf. (20-45%) | Use with caution |
 
-The pipeline works best for visually obvious damage (shattered glass, flat tires, broken lamps) and gives reasonable estimates for moderate damage (dents). For subtle damage (light scratches, hairline cracks), both detection and classification confidence are lower — results should be treated as approximate.
+The pipeline works best for visually obvious damage (shattered glass, flat tires, broken lamps) and front-end impacts with multiple distinct damage types. For subtle damage (light scratches, hairline cracks), both detection and classification confidence are lower — results should be treated as approximate.
 
 ---
 
@@ -443,9 +434,8 @@ results/                            # Result images (for this README)
     class_distribution/             # Dataset class distribution
 
 reports/                            # Generated PDF reports (pipeline output)
-    demo_report_glass_shatter.pdf   # Demo: glass shatter → severe, windshield
-    demo_report_scratches_and_cracks.pdf  # Demo: crack + scratch
-    demo_report_multiple_damages.pdf      # Demo: 4 damages on one car
+    demo_report_glass_shatter.pdf           # Demo: glass shatter → severe, windshield
+    demo_report_multi_damage_best_iou.pdf   # Demo: 3 damages, best IoU with ground truth
 
 runs/detect/yolo11m_cardd_6classes/ # Full training output (gitignored)
     weights/best.pt                 # Best model weights

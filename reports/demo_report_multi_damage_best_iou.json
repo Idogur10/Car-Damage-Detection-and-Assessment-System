@@ -1,0 +1,149 @@
+{
+  "image": "CarDD_YOLO_6classes\\images\\test\\003441.jpg",
+  "total_damages": 3,
+  "cost_summary": {
+    "total_min": 1350,
+    "total_max": 4800,
+    "total_average": 3075.0
+  },
+  "detections": [
+    {
+      "damage_type": "dent",
+      "yolo_confidence": 0.8974180221557617,
+      "bbox": {
+        "x1": 55.29794692993164,
+        "y1": 166.3082733154297,
+        "x2": 404.4214172363281,
+        "y2": 469.4035949707031
+      },
+      "severity": "severe",
+      "severity_confidence": 0.847,
+      "severity_scores": {
+        "minor": 0.109,
+        "moderate": 0.044,
+        "severe": 0.847
+      },
+      "location_label": "headlight",
+      "location_confidence": 0.532,
+      "location_scores": {
+        "front_bumper": 0.1,
+        "rear_bumper": 0.019,
+        "hood": 0.038,
+        "trunk": 0.01,
+        "front_door": 0.002,
+        "rear_door": 0.004,
+        "fender": 0.142,
+        "roof": 0.008,
+        "windshield": 0.017,
+        "rear_window": 0.004,
+        "side_mirror": 0.003,
+        "headlight": 0.532,
+        "taillight": 0.02,
+        "left_side": 0.029,
+        "right_side": 0.031,
+        "front": 0.032,
+        "rear": 0.008
+      },
+      "cost": {
+        "damage_type": "dent",
+        "severity": "severe",
+        "min_cost": 1000,
+        "max_cost": 3500,
+        "average_cost": 2250.0,
+        "method": "Panel replacement + repaint"
+      }
+    },
+    {
+      "damage_type": "lamp broken",
+      "yolo_confidence": 0.8891398906707764,
+      "bbox": {
+        "x1": 357.0821533203125,
+        "y1": 171.60020446777344,
+        "x2": 894.150146484375,
+        "y2": 437.8039855957031
+      },
+      "severity": "moderate",
+      "severity_confidence": 0.783,
+      "severity_scores": {
+        "minor": 0.01,
+        "moderate": 0.783,
+        "severe": 0.207
+      },
+      "location_label": "headlight",
+      "location_confidence": 0.573,
+      "location_scores": {
+        "front_bumper": 0.135,
+        "rear_bumper": 0.014,
+        "hood": 0.028,
+        "trunk": 0.004,
+        "front_door": 0.002,
+        "rear_door": 0.002,
+        "fender": 0.097,
+        "roof": 0.008,
+        "windshield": 0.018,
+        "rear_window": 0.003,
+        "side_mirror": 0.001,
+        "headlight": 0.573,
+        "taillight": 0.017,
+        "left_side": 0.03,
+        "right_side": 0.031,
+        "front": 0.03,
+        "rear": 0.006
+      },
+      "cost": {
+        "damage_type": "lamp_broken",
+        "severity": "moderate",
+        "min_cost": 150,
+        "max_cost": 500,
+        "average_cost": 325.0,
+        "method": "Aftermarket lamp replacement"
+      }
+    },
+    {
+      "damage_type": "scratch",
+      "yolo_confidence": 0.8544279932975769,
+      "bbox": {
+        "x1": 141.15452575683594,
+        "y1": 439.9781799316406,
+        "x2": 625.5531005859375,
+        "y2": 667.0
+      },
+      "severity": "moderate",
+      "severity_confidence": 0.737,
+      "severity_scores": {
+        "minor": 0.229,
+        "moderate": 0.737,
+        "severe": 0.034
+      },
+      "location_label": "headlight",
+      "location_confidence": 0.41,
+      "location_scores": {
+        "front_bumper": 0.201,
+        "rear_bumper": 0.013,
+        "hood": 0.07,
+        "trunk": 0.005,
+        "front_door": 0.002,
+        "rear_door": 0.003,
+        "fender": 0.183,
+        "roof": 0.007,
+        "windshield": 0.013,
+        "rear_window": 0.002,
+        "side_mirror": 0.002,
+        "headlight": 0.41,
+        "taillight": 0.008,
+        "left_side": 0.022,
+        "right_side": 0.023,
+        "front": 0.029,
+        "rear": 0.006
+      },
+      "cost": {
+        "damage_type": "scratch",
+        "severity": "moderate",
+        "min_cost": 200,
+        "max_cost": 800,
+        "average_cost": 500.0,
+        "method": "Touch-up paint or partial respray"
+      }
+    }
+  ]
+}
