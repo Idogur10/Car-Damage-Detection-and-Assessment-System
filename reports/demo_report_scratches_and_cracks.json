@@ -1,0 +1,103 @@
+{
+  "image": "CarDD_YOLO_6classes\\images\\test\\000088.jpg",
+  "total_damages": 2,
+  "cost_summary": {
+    "total_min": 300,
+    "total_max": 1100,
+    "total_average": 700.0
+  },
+  "detections": [
+    {
+      "damage_type": "crack",
+      "yolo_confidence": 0.5861867666244507,
+      "bbox": {
+        "x1": 64.35262298583984,
+        "y1": 0.0,
+        "x2": 142.6602783203125,
+        "y2": 49.17221450805664
+      },
+      "severity": "minor",
+      "severity_confidence": 0.531,
+      "severity_scores": {
+        "minor": 0.531,
+        "moderate": 0.051,
+        "severe": 0.418
+      },
+      "location_label": "fender",
+      "location_confidence": 0.276,
+      "location_scores": {
+        "front_bumper": 0.112,
+        "rear_bumper": 0.047,
+        "hood": 0.008,
+        "trunk": 0.105,
+        "front_door": 0.014,
+        "rear_door": 0.055,
+        "fender": 0.276,
+        "roof": 0.001,
+        "windshield": 0.001,
+        "rear_window": 0.002,
+        "side_mirror": 0.014,
+        "headlight": 0.093,
+        "taillight": 0.203,
+        "left_side": 0.012,
+        "right_side": 0.011,
+        "front": 0.028,
+        "rear": 0.018
+      },
+      "cost": {
+        "damage_type": "crack",
+        "severity": "minor",
+        "min_cost": 100,
+        "max_cost": 300,
+        "average_cost": 200.0,
+        "method": "Filler and spot repair"
+      }
+    },
+    {
+      "damage_type": "scratch",
+      "yolo_confidence": 0.3537653982639313,
+      "bbox": {
+        "x1": 280.9769592285156,
+        "y1": 209.7320556640625,
+        "x2": 437.5859375,
+        "y2": 310.1940612792969
+      },
+      "severity": "moderate",
+      "severity_confidence": 0.521,
+      "severity_scores": {
+        "minor": 0.459,
+        "moderate": 0.521,
+        "severe": 0.02
+      },
+      "location_label": "fender",
+      "location_confidence": 0.437,
+      "location_scores": {
+        "front_bumper": 0.06,
+        "rear_bumper": 0.019,
+        "hood": 0.005,
+        "trunk": 0.141,
+        "front_door": 0.012,
+        "rear_door": 0.043,
+        "fender": 0.437,
+        "roof": 0.001,
+        "windshield": 0.001,
+        "rear_window": 0.001,
+        "side_mirror": 0.009,
+        "headlight": 0.092,
+        "taillight": 0.129,
+        "left_side": 0.012,
+        "right_side": 0.012,
+        "front": 0.018,
+        "rear": 0.009
+      },
+      "cost": {
+        "damage_type": "scratch",
+        "severity": "moderate",
+        "min_cost": 200,
+        "max_cost": 800,
+        "average_cost": 500.0,
+        "method": "Touch-up paint or partial respray"
+      }
+    }
+  ]
+}

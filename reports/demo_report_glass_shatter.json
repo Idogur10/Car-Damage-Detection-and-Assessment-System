@@ -1,0 +1,57 @@
+{
+  "image": "CarDD_YOLO_6classes\\images\\test\\000320.jpg",
+  "total_damages": 1,
+  "cost_summary": {
+    "total_min": 400,
+    "total_max": 1500,
+    "total_average": 950.0
+  },
+  "detections": [
+    {
+      "damage_type": "glass shatter",
+      "yolo_confidence": 0.9448338150978088,
+      "bbox": {
+        "x1": 1.434326171875,
+        "y1": 27.425861358642578,
+        "x2": 965.2322998046875,
+        "y2": 656.3922119140625
+      },
+      "severity": "severe",
+      "severity_confidence": 0.7,
+      "severity_scores": {
+        "minor": 0.22,
+        "moderate": 0.081,
+        "severe": 0.7
+      },
+      "location_label": "windshield",
+      "location_confidence": 0.832,
+      "location_scores": {
+        "front_bumper": 0.001,
+        "rear_bumper": 0.001,
+        "hood": 0.004,
+        "trunk": 0.002,
+        "front_door": 0.005,
+        "rear_door": 0.025,
+        "fender": 0.003,
+        "roof": 0.006,
+        "windshield": 0.832,
+        "rear_window": 0.064,
+        "side_mirror": 0.007,
+        "headlight": 0.004,
+        "taillight": 0.003,
+        "left_side": 0.012,
+        "right_side": 0.01,
+        "front": 0.016,
+        "rear": 0.005
+      },
+      "cost": {
+        "damage_type": "glass_shatter",
+        "severity": "severe",
+        "min_cost": 400,
+        "max_cost": 1500,
+        "average_cost": 950.0,
+        "method": "Full glass replacement (OEM)"
+      }
+    }
+  ]
+}

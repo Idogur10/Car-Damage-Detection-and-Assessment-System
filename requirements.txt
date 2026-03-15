@@ -6,3 +6,5 @@ Pillow
 pycocotools
 opencv-python
 ultralytics
+transformers  # CLIP model for damage severity and location classification
+fpdf2  # PDF report generation
